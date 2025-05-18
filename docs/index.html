@@ -1,34 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>R-8Test</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>R-8 Roommate Finder</title>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
+  <div class="header">
+    <div class="logo">
+      <img src="assets/178207_DormsEblock2.png" alt="Logo" style="height: 40px;" />
+      <h1>R-8 Roommate Finder</h1>
+    </div>
+    <button class="btn">Login / Sign Up</button>
+  </div>
 
   <div class="container">
-    <header class="header">
-      <h1>R-8Test</h1>
-      <img src="assets/178207_DormsEblock2.png" alt="Logo" style="height: 40px;">
-    </header>
+    <div class="filter-panel">
+      <h3>Filter by</h3>
+      <label>University</label>
+      <select>
+        <option>All</option>
+        <option>Georgia Tech</option>
+        <option>UGA</option>
+        <option>Georgia State</option>
+      </select>
 
-    <p>This is a roommate finder for universities across Georgia.</p>
+      <label>Gender</label>
+      <select>
+        <option>Any</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Non-binary</option>
+      </select>
+
+      <label>Preferences</label>
+      <input type="text" placeholder="e.g. Quiet, Early riser" />
+    </div>
 
     <div class="card-grid">
       <div class="card">
-        <img src="https://via.placeholder.com/80" alt="User">
+        <img src="https://via.placeholder.com/80" alt="User" />
         <h3>Alex</h3>
         <p>Georgia State University</p>
+        <p>Looking for: Quiet, Clean</p>
+        <button class="btn">Message</button>
       </div>
+
       <div class="card">
-        <img src="https://via.placeholder.com/80" alt="User">
-        <h3>Taylor</h3>
+        <img src="https://via.placeholder.com/80" alt="User" />
+        <h3>Samantha</h3>
         <p>Georgia Tech</p>
+        <p>Looking for: Night owl, Gamer</p>
+        <button class="btn">Message</button>
+      </div>
+
+      <div class="card">
+        <img src="https://via.placeholder.com/80" alt="User" />
+        <h3>Marcus</h3>
+        <p>UGA</p>
+        <p>Looking for: Tidy, No Pets</p>
+        <button class="btn">Message</button>
       </div>
     </div>
   </div>
-
 </body>
 </html>
