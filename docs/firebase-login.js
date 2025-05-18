@@ -14,25 +14,25 @@ firebase.initializeApp(firebaseConfig);
 
 // Run when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  const loginForm = document.getElementById("login-form");
+  const signupForm = document.getElementById("signup-form");
   const errorMessage = document.getElementById("error-message");
 
-  if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
+  if (signupForm) {
+    signupForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const email = loginForm["email"].value;
-      const password = loginForm["password"].value;
+      const email = signupForm["email"].value;
+      const password = signupForm["password"].value;
 
-      firebase.auth().signInWithEmailAndPassword(email, password)
+      firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(() => {
-          // Success: Redirect to homepage
+          // ✅ Success → Redirect to homepage or login
           window.location.href = "index.html";
         })
         .catch((error) => {
-          // Show error message
-          errorMessage.textContent = "Incorrect email or password.";
-          console.error("Login failed:", error.message);
+          // ❌ Show error message
+          errorMessage.textContent = error.message;
+          console.error("Signup failed:", error.message);
         });
     });
   }
