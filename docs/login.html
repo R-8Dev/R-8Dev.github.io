@@ -5,15 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - R-8 Roommate Finder</title>
   <link rel="stylesheet" href="assets/style.css" />
-  <!-- Firebase App (core) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
 
-<!-- Firebase Auth -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
 
-<!-- Your custom JS file -->
-<script src="firebase-login.js" defer></script>
-
+  <!-- Custom login JS -->
+  <script src="firebase-login.js" defer></script>
 </head>
 <body>
   <div class="header">
@@ -25,7 +23,7 @@
 
   <div class="container">
     <h2>Login</h2>
-    <form action="#" method="post" class="login-form">
+    <form id="login-form" class="login-form">
       <label for="email">Email:</label><br />
       <input type="email" id="email" name="email" required /><br />
 
@@ -34,6 +32,7 @@
 
       <button type="submit" class="btn">Login</button>
     </form>
+    <p id="error-message" style="color: red;"></p>
     <p>Don't have an account? <a href="signup.html">Sign up</a></p>
   </div>
 </body>
