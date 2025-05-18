@@ -11,25 +11,36 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
 
-// Handle login form
-document.addEventListener('DOMContentLoaded', () => {
-  const loginForm = document.querySelector('.login-form');
+// Reference the login form
+const loginForm = document.getElementById("login-form");
 
-  loginForm.addEventListener('submit', (e) => {
+if (loginForm) {
+  loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const email = loginForm.email.value;
-    const password = loginForm.password.value;
+    const email = loginForm["email"].value;
+    const password = loginForm["password"].value;
 
-    auth.signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        alert("Login successful!");
-        window.location.href = "index.html"; // Redirect to home page
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(() => {
+        // ✅ Login success → redirect to homepage
+        window.location.href = "index.html";
       })
       .catch((error) => {
-        alert("Login failed: " + error.message);
+        console.error("Login failed:", error.message);
+
+        // ❌ Redirect back to login with error message
+        window.location.href = "login.html?error=1";
       });
   });
-});
+}
+
+// Show error message if login failed
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("error") === "1") {
+  const errorMsg = document.createElement("p");
+  errorMsg.style.color = "red";
+  errorMsg.textContent = "Incorrect email or password.";
+  document.body.prepend(errorMsg);
+}
