@@ -1,5 +1,4 @@
 title: R-8Test
-logo: docs/assets/178207_DormsEblock2.png
-Description: Description
-#show_downloads: true
+logo: assets/178207_DormsEblock2.png
+description: Description
 theme: jekyll-theme-minimal
