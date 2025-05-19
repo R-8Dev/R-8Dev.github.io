@@ -1,4 +1,4 @@
-// Only define config if not already defined globally
+// Avoid redefining firebaseConfig
 if (typeof firebaseConfig === 'undefined') {
   window.firebaseConfig = {
     apiKey: "AIzaSyC0a5wUtspLGBPpJ6XS6Axg-8XsgiiZbZI",
@@ -11,12 +11,12 @@ if (typeof firebaseConfig === 'undefined') {
   };
 }
 
-// Only initialize Firebase once
+// Initialize Firebase once
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-// Only define auth and db if not already defined
+// Declare auth/db only once
 if (typeof window.auth === 'undefined') {
   window.auth = firebase.auth();
 }
