@@ -23,7 +23,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 16px 32px;
-  background-color: #0044cc;
+  background-color: #ffffff;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
@@ -35,7 +35,7 @@ body {
 
 .header h1 {
   font-size: 20px;
-  color: #ffffff;
+  color: #0044cc;
 }
 
 /* ────────────────────────────────────────────────────
