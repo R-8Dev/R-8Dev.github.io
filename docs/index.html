@@ -38,17 +38,21 @@
         authButton.textContent = "Logout";
         authButton.href = "#"; // prevent navigation
         
-        authButton.addEventListener('click', (e) => {
-          e.preventDefault();
-          auth.signOut().then(() => {
-            alert("Logged out!");
-            location.reload(); // refresh to update UI
+        // Replace button to remove old listeners
+          const newButton = authButton.cloneNode(true);
+          authButton.parentNode.replaceChild(newButton, authButton);
+
+          newButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            auth.signOut().then(() => {
+              alert("Logged out!");
+              location.reload();
+            });
           });
-        });
-      } else {
+        }  else {
         // User is not logged in
         authButton.textContent = "Login / Signup";
-        authButton.href = "login.html"; // or wherever your login page is
+        authButton.href = "login.html"; 
       }
     });
   });
