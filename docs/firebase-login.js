@@ -14,9 +14,9 @@ if (typeof firebaseConfig === 'undefined') {
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
-const auth = firebase.auth();
+//const auth = firebase.auth();
 // ✅ Initialize Firestore
-const db = firebase.firestore();
+//const db = firebase.firestore();
 
 // Make db accessible in other scripts (optional but recommended)
 window.db = db;
