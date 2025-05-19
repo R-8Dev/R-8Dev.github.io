@@ -20,16 +20,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const preferences = document.getElementById('preferences').value;
 
       try {
-        await window.db.collection('records').add({
-          uid: user.uid,
-          const existingRecords = await window.db.collection('records')
-  .where('uid', '==', uid)
-  .get();
+         const existingRecords = await window.db.collection('records')
+        .where('uid', '==', uid)
+        .get();
 
-if (!existingRecords.empty) {
+        if (!existingRecords.empty) {
   alert('You already have a record. Please delete it before adding a new one.');
   return;
 }
+        
+        await window.db.collection('records').add({
+          uid: user.uid,
           name,
           university,
           preferences,
