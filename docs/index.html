@@ -27,9 +27,10 @@
   measurementId: "G-62PF9Z5RNY"
 };
 
-
     // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
     const auth = firebase.auth();
 
 
