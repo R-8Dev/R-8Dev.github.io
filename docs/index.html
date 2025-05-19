@@ -48,13 +48,12 @@
               location.reload();
             });
           }); 
-        authButton.style.visibility = "visible";
         }  else {
-        authButton.style.visibility = "visible";
         // User is not logged in
         authButton.textContent = "Login / Signup";
         authButton.href = "login.html"; 
       }
+        authButton.style.visibility = "visible";
     });
   }
 window.addEventListener('DOMContentLoaded', handleAuthState);
