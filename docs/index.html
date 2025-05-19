@@ -31,32 +31,47 @@
     const authButton = document.getElementById('auth-button');
      if (!authButton) return;
 
-    auth.onAuthStateChanged((user) => {
-      
-      if (user) {
 
- const newButton = authButton.cloneNode(true); // remove old listeners
+
+    
+    function setLoginButton(button) {
+  button.textContent = "Login / Signup";
+  button.href = "login.html";
+  button.onclick = null;
+  button.style.visibility = "visible";
+}
+
+function handleAuthState() {
+  const authButton = document.getElementById('auth-button');
+
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      // Remove old listeners by replacing the button
+      const newButton = authButton.cloneNode(true);
       authButton.parentNode.replaceChild(newButton, authButton);
 
       newButton.textContent = "Logout";
       newButton.href = "#";
+
       newButton.addEventListener('click', (e) => {
         e.preventDefault();
-
-      auth.signOut().then(() => {
-        alert("Logged out!");
-        // Update button to login immediately, no reload
-        setLoginButton(authButton);
+        auth.signOut().then(() => {
+          alert("Logged out!");
+          setLoginButton(newButton); // use newButton here
+        });
       });
-        }  else {
-        // User is not logged in
-        authButton.textContent = "Login / Signup";
-        authButton.href = "login.html"; 
-      }
-      document.getElementById('auth-button').style.visibility = "visible";
-    });
-  }
+
+      newButton.style.visibility = "visible";
+
+    } else {
+      // Not logged in
+      setLoginButton(authButton);
+    }
+  });
+}
+
 window.addEventListener('DOMContentLoaded', handleAuthState);
+    
     
   </script>
   
