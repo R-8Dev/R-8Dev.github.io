@@ -75,9 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
         displayRecords();  // Show records when user is logged in
       }
     } else {
-      // Not logged in — redirect to login page
-      location.replace("login.html");
-    }
+      // Not logged in 
+      // Nothing for now
   });
 });
 
