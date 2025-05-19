@@ -12,6 +12,9 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// ✅ Initialize Firestore
+const db = firebase.firestore();
+
 // Run when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
@@ -21,17 +24,22 @@ document.addEventListener("DOMContentLoaded", () => {
     signupForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      const email = signupForm["email"].value;
-      const password = signupForm["password"].value;
+      // ✅ Fix: Correctly reference form input fields by their IDs
+      const email = document.getElementById("signup-email").value;
+      const password = document.getElementById("signup-password").value;
 
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(() => {
-          // ✅ Success → Redirect to homepage or login
+          // ✅ Success → Redirect
           window.location.href = "index.html";
         })
         .catch((error) => {
-          // ❌ Show error message
-          errorMessage.textContent = error.message;
+          // ❌ Error handling
+          if (errorMessage) {
+            errorMessage.textContent = error.message;
+          } else {
+            alert(error.message);
+          }
           console.error("Signup failed:", error.message);
         });
     });
