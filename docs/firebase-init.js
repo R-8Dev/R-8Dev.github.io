@@ -24,8 +24,8 @@ if (typeof window.db === 'undefined') {
 }
 
 // Wait for DOM before trying to use elements
-document.addEventListener("DOMContentLoaded", () => {
-  const signupForm = document.getElementById("signup-form");
+//document.addEventListener("DOMContentLoaded", () => {     // Removed because of error
+ // const signupForm = document.getElementById("signup-form");
 
   // Only add listener if form is present
   if (signupForm) {
