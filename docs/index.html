@@ -38,7 +38,7 @@
     auth.onAuthStateChanged((user) => {
       if (user) {
         // User is logged in
-        authButton.textContent = "Logout-new";
+        authButton.textContent = "Logout";
         authButton.href = "#"; // prevent navigation
         authButton.addEventListener('click', (e) => {
           e.preventDefault();
@@ -49,7 +49,7 @@
         });
       } else {
         // User is not logged in
-        authButton.textContent = "Login / Signup-new";
+        authButton.textContent = "Login / Signup";
         authButton.href = "login.html"; // or wherever your login page is
       }
     });
