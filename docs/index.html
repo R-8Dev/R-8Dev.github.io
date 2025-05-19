@@ -42,11 +42,12 @@
       newButton.href = "#";
       newButton.addEventListener('click', (e) => {
         e.preventDefault();
-        auth.signOut().then(() => {
-          alert("Logged out!");
-          location.reload();
-            });
-          }); 
+
+      auth.signOut().then(() => {
+        alert("Logged out!");
+        // Update button to login immediately, no reload
+        setLoginButton(authButton);
+      });
         }  else {
         // User is not logged in
         authButton.textContent = "Login / Signup";
