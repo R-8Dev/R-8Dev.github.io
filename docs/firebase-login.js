@@ -1,52 +1,43 @@
-if (typeof firebaseConfig === 'undefined') {
-  const firebaseConfig = {
-  apiKey: "AIzaSyC0a5wUtspLGBPpJ6XS6Axg-8XsgiiZbZI",
-  authDomain: "r-8-test.firebaseapp.com",
-  projectId: "r-8-test",
-  storageBucket: "r-8-test.firebasestorage.app",
-  messagingSenderId: "289094248821",
-  appId: "1:289094248821:web:aabdd412a0e5a6e5730b3c",
-  measurementId: "G-62PF9Z5RNY"
-};
-}
+// firebase-login.js
 
-// Initialize Firebase
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
-//const auth = firebase.auth();
-// ✅ Initialize Firestore
-//const db = firebase.firestore();
-
-// Make db accessible in other scripts (optional but recommended)
-window.db = db;
-
-// Run when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
-  const errorMessage = document.getElementById("error-message");
+  const loginForm = document.getElementById("login-form");
 
+  // Signup
   if (signupForm) {
     signupForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      // ✅ Fix: Correctly reference form input fields by their IDs
       const email = document.getElementById("signup-email").value;
       const password = document.getElementById("signup-password").value;
 
-      firebase.auth().createUserWithEmailAndPassword(email, password)
+      auth.createUserWithEmailAndPassword(email, password)
         .then(() => {
-          // ✅ Success → Redirect
+          alert("Account created!");
           window.location.href = "index.html";
         })
         .catch((error) => {
-          // ❌ Error handling
-          if (errorMessage) {
-            errorMessage.textContent = error.message;
-          } else {
-            alert(error.message);
-          }
-          console.error("Signup failed:", error.message);
+          alert(error.message);
+        });
+    });
+  }
+
+  // Login
+  if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          alert("Logged in!");
+          window.location.href = "index.html";
+        })
+        .catch((error) => {
+          alert(error.message);
         });
     });
   }
