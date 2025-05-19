@@ -276,7 +276,3 @@ button:hover {
     margin: 20px 12px;
   }
 }
-
-#auth-button {
-  visibility: hidden;
-}
