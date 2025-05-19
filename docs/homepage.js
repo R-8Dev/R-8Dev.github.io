@@ -41,6 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Listen for auth state changes
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+  // Real time listener
+      db.collection("users").doc(user.uid).onSnapshot((doc) => {
+  if (doc.exists) {
+    console.log("Realtime user data:", doc.data());
+    // Update your UI here
+  }
+});
       // Fetch user profile data (optional)
       window.db.collection("users").doc(user.uid).get()
         .then((doc) => {
