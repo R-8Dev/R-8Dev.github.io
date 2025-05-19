@@ -1,5 +1,3 @@
-// firebase-init.js
-
 // Your Firebase config (replace with your actual config)
 
 
