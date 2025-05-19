@@ -34,11 +34,14 @@
         const auth = firebase.auth();
 
 window.addEventListener('DOMContentLoaded', () => {
-    if (user) {
-        // User is logged in
-        location.replace("https://r-8dev.github.io");
-        });
-    
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            // ✅ User is logged in
+            location.replace("https://r-8dev.github.io");
+        }
+    });
+});
+
 
         
     </script>
