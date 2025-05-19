@@ -11,7 +11,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script>
-
+  authButton.style.visibility = "hidden";
     //Firebase
   const firebaseConfig = {
   apiKey: "AIzaSyC0a5wUtspLGBPpJ6XS6Axg-8XsgiiZbZI",
@@ -54,6 +54,7 @@
         authButton.textContent = "Login / Signup";
         authButton.href = "login.html"; 
       }
+      authButton.style.visibility = "visible";
     });
   }
 window.addEventListener('DOMContentLoaded', handleAuthState);
