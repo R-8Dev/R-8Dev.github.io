@@ -16,7 +16,6 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-// Declare auth and db globally (once)
 if (typeof window.auth === 'undefined') {
   window.auth = firebase.auth();
 }
@@ -24,43 +23,43 @@ if (typeof window.db === 'undefined') {
   window.db = firebase.firestore();
 }
 
-// Wait for DOM to load before attaching event listeners
+// Wait for DOM before trying to use elements
 document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
 
-  if (!signupForm) {
-    console.warn("Signup form not found on this page.");
-    return;
-  }
+  // Only add listener if form is present
+  if (signupForm) {
+    signupForm.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-  signupForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+      const email = document.getElementById("signup-email").value;
+      const password = document.getElementById("signup-password").value;
+      const confirmPassword = document.getElementById("signup-confirm-password").value;
 
-    const email = document.getElementById("signup-email").value;
-    const password = document.getElementById("signup-password").value;
-    const confirmPassword = document.getElementById("signup-confirm-password").value;
+      if (password !== confirmPassword) {
+        alert("Passwords don't match!");
+        return;
+      }
 
-    if (password !== confirmPassword) {
-      alert("Passwords don't match!");
-      return;
-    }
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
 
-    auth.createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-
-        // Add user record to Firestore
-        return db.collection("users").doc(user.uid).set({
-          email: user.email,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          return db.collection("users").doc(user.uid).set({
+            email: user.email,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          });
+        })
+        .then(() => {
+          alert("Account created successfully!");
+          location.replace("https://r-8dev.github.io");
+        })
+        .catch((error) => {
+          alert("Error: " + error.message);
         });
-      })
-      .then(() => {
-        alert("Account created successfully!");
-        location.replace("https://r-8dev.github.io");
-      })
-      .catch((error) => {
-        alert("Error: " + error.message);
-      });
-  });
+    });
+  } else {
+    // Optional: Log warning so you know it's not running on pages without the form
+    console.warn("signup-form not found on this page.");
+  }
 });
