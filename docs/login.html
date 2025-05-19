@@ -32,38 +32,6 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
-
-
-
-
-
-window.addEventListener('DOMContentLoaded', () => {
-    const authButton = document.getElementById('auth-button');
-
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        // User is logged in
-        authButton.textContent = "Logout-new";
-        authButton.href = "#"; // prevent navigation
-        authButton.addEventListener('click', (e) => {
-          e.preventDefault();
-          auth.signOut().then(() => {
-            alert("Logged out!");
-            location.reload(); // refresh to update UI
-          });
-        });
-      } else {
-        // User is not logged in
-        authButton.textContent = "Login / Signup-new";
-        authButton.href = "login.html"; // or wherever your login page is
-      }
-    });
-  });
-
-
-
-
-
         
     </script>
 </head>
