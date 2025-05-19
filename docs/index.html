@@ -3,125 +3,369 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>R-8</title>
+  <title>R-8 Roommate Finder</title>
+  <!-- Link to our CSS -->
   <link rel="stylesheet" href="assets/style.css" />
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
+  <!-- HEADER -->
   <div class="header">
     <div class="logo">
       <img src="assets/178207_DormsEblock2.png" alt="Logo" style="height: 40px;" />
-      <h1>R-8</h1>
+      <h1>R-8 Roommate Finder</h1>
     </div>
-    <button class="btn" onclick="window.location.href='docs/login.html'">Login / Sign Up</button>
+    <button id="loginBtn" class="btn">Login / Sign Up</button>
   </div>
 
+  <!-- MAIN CONTAINER -->
   <div class="container">
+    <!-- FILTER PANEL (static for now) -->
     <div class="filter-panel">
       <h3>Filter by</h3>
-<label>University</label>
-<select>
-  <optgroup label="State universities">
-    <option>Akaki Tsereteli State University (Kutaisi)</option>
-    <option>Akhaltsikhe State Education University</option>
-    <option>Batumi Art Teaching University</option>
-    <option>Batumi Shota Rustaveli State University</option>
-    <option>Batumi State Maritime Academy</option>
-    <option>Georgian Technical University (Tbilisi)</option>
-    <option>Gori State Teaching University</option>
-    <option>Ilia State University</option>
-    <option>International School of Economics at Tbilisi State University</option>
-    <option>Shota Meskhia Zugdidi State University</option>
-    <option>Sokhumi State University</option>
-    <option>Tbilisi Ivane Javakhishvili State University</option>
-    <option>Tbilisi State Academy of Arts</option>
-    <option>Tbilisi State Medical University</option>
-    <option>Tbilisi Vano Sarajishvili State Conservatory</option>
-    <option>Telavi Iakob Gogebashvili State University</option>
-    <option>Shota Rustaveli University of Theater and Cinema (Tbilisi)</option>
-  </optgroup>
-  <optgroup label="Private universities">
-    <option>Alterbridge University (Tbilisi)</option>
-    <option>Agricultural University of Georgia (Tbilisi)</option>
-    <option>American University for Humanities Tbilisi Campus</option>
-    <option>BAU International University, Batumi (Batumi)</option>
-    <option>Business and Technology University (Tbilisi)</option>
-    <option>Caucasus International University (Tbilisi)</option>
-    <option>Central Global University (Kutaisi)</option>
-    <option>Caucasus University (Tbilisi)</option>
-    <option>David Aghmashenebeli University of Georgia (Tbilisi)</option>
-    <option>David Tvildiani Medical University (Tbilisi)</option>
-    <option>East European University (Tbilisi)</option>
-    <option>European University (Tbilisi)</option>
-    <option>Free University of Tbilisi</option>
-    <option>Georgian American University (Tbilisi)</option>
-    <option>Georgian Aviation University (Tbilisi)</option>
-    <option>Georgian International University (Tbilisi)</option>
-    <option>Georgian Institute of Public Affairs (Tbilisi)</option>
-    <option>Georgian National University SEU (Tbilisi)</option>
-    <option>Grigol Robakidze University (Tbilisi)</option>
-    <option>Guram Tavartkiladze Tbilisi Teaching University</option>
-    <option>International Black Sea University (Tbilisi)</option>
-    <option>Kutaisi University</option>
-    <option>Kutaisi International University</option>
-    <option>New Vision University (Tbilisi)</option>
-    <option>New Georgian University (Poti)</option>
-    <option>Saint Andrews Georgian University (Tbilisi)</option>
-    <option>Sulkhan-Saba Orbeliani University (Tbilisi)</option>
-    <option>Sukhishvili Teaching University (Gori)</option>
-    <option>Petre Shotadze Tbilisi Medical Academy (Tbilisi)</option>
-    <option>Tbilisi Medical Academy</option>
-    <option>Tbilisi Medical Institute "Hippocrates"</option>
-    <option>Tbilisi Teaching University</option>
-    <option>Tbilisi University "Metekhi"</option>
-    <option>Teaching University European Academy (Zugdidi)</option>
-    <option>Teaching University Geomedi (Tbilisi)</option>
-    <option>Teaching University "Iveria" (Tbilisi)</option>
-    <option>Teaching University of International Relations of Georgia (Tbilisi)</option>
-    <option>Teaching University "Rvali" (Rustavi)</option>
-    <option>Teaching University SEU (Tbilisi)</option>
-    <option>The University of Georgia (Tbilisi)</option>
-    <option>University "Sakartvelo" (Tbilisi)</option>
-  </optgroup>
-</select>
+      <label>University</label>
+      <select id="universitySelect">
+        <!-- Full list of 58 universities as <option> elements -->
+        <option value="Kutaisi International University">Kutaisi International University</option>
+        <option value="Ivane Javakhishvili Tbilisi State University">Ivane Javakhishvili Tbilisi State University</option>
+        <option value="Ilia State University">Ilia State University</option>
+        <option value="Georgian Technical University">Georgian Technical University</option>
+        <option value="Tbilisi State Medical University">Tbilisi State Medical University</option>
+        <option value="Akaki Tsereteli State University">Akaki Tsereteli State University</option>
+        <option value="Batumi Shota Rustaveli State University">Batumi Shota Rustaveli State University</option>
+        <option value="Caucasus University">Caucasus University</option>
+        <option value="International Black Sea University">International Black Sea University</option>
+        <option value="Sokhumi State University">Sokhumi State University</option>
+        <option value="Batumi State Maritime Academy">Batumi State Maritime Academy</option>
+        <option value="Tbilisi State Academy of Arts">Tbilisi State Academy of Arts</option>
+        <option value="University of Georgia in Tbilisi">University of Georgia in Tbilisi</option>
+        <option value="Agricultural University of Georgia">Agricultural University of Georgia</option>
+        <option value="Free University of Tbilisi">Free University of Tbilisi</option>
+        <option value="Georgian National University SEU">Georgian National University SEU</option>
+        <option value="Shota Rustaveli Theatre and Film Georgian State University">Shota Rustaveli Theatre and Film Georgian State University</option>
+        <option value="V. Sarajishvili Tbilisi State Conservatoire">V. Sarajishvili Tbilisi State Conservatoire</option>
+        <option value="Business and Technology University">Business and Technology University</option>
+        <option value="Georgian Institute of Public Affairs">Georgian Institute of Public Affairs</option>
+        <option value="Georgian American University">Georgian American University</option>
+        <option value="David Tvildiani Medical University">David Tvildiani Medical University</option>
+        <option value="Iakob Gogebashvili Telavi State University">Iakob Gogebashvili Telavi State University</option>
+        <option value="New Vision University">New Vision University</option>
+        <option value="Caucasus International University">Caucasus International University</option>
+        <option value="Gori State Teaching University">Gori State Teaching University</option>
+        <option value="Grigol Robakidze University">Grigol Robakidze University</option>
+        <option value="European University - Tbilisi">European University - Tbilisi</option>
+        <option value="Shota Meskhia State Teaching University">Shota Meskhia State Teaching University</option>
+        <option value="Tbilisi Open Teaching University">Tbilisi Open Teaching University</option>
+        <option value="Saint Andrew the First-Called Georgian University">Saint Andrew the First-Called Georgian University</option>
+        <option value="Sulkhan-Saba Orbeliani Teaching University">Sulkhan-Saba Orbeliani Teaching University</option>
+        <option value="East European University, Georgia">East European University, Georgia</option>
+        <option value="Kutaisi University">Kutaisi University</option>
+        <option value="BAU International University, Batumi">BAU International University, Batumi</option>
+        <option value="Petre Shotadze Tbilisi Medical Academy">Petre Shotadze Tbilisi Medical Academy</option>
+        <option value="Samtskhe-Javakheti State University">Samtskhe-Javakheti State University</option>
+        <option value="Batumi Navigation Teaching University">Batumi Navigation Teaching University</option>
+        <option value="Teaching University Geomedi">Teaching University Geomedi</option>
+        <option value="Bank of Georgia University">Bank of Georgia University</option>
+        <option value="Georgian Aviation University">Georgian Aviation University</option>
+        <option value="Guram Tavartkiladze Teaching University">Guram Tavartkiladze Teaching University</option>
+        <option value="Batumi Art Teaching University">Batumi Art Teaching University</option>
+        <option value="David Aghmashenebeli University of Georgia">David Aghmashenebeli University of Georgia</option>
+        <option value="Georgian State Teaching University of Physical Education and Sport">Georgian State Teaching University of Physical Education and Sport</option>
+        <option value="Tbilisi Humanitarian Teaching University">Tbilisi Humanitarian Teaching University</option>
+        <option value="Tbilisi Teaching University Gorgasali">Tbilisi Teaching University Gorgasali</option>
+        <option value="Tbilisi David Agmashenebeli Teaching University">Tbilisi David Agmashenebeli Teaching University</option>
+        <option value="Tbilisi Teaching University">Tbilisi Teaching University</option>
+        <option value="Tbel Abuserisdze Teaching University of Georgian Patriarchate">Tbel Abuserisdze Teaching University of Georgian Patriarchate</option>
+        <option value="Tbilisi University of International Relations">Tbilisi University of International Relations</option>
+        <option value="Tbilisi Medical Teaching University Hippocrates">Tbilisi Medical Teaching University Hippocrates</option>
+        <option value="Ekvtime Takaishvili Teaching University">Ekvtime Takaishvili Teaching University</option>
+        <option value="American University for Humanities - Tbilisi">American University for Humanities - Tbilisi</option>
+        <option value="St. Grigol Peradze Tbilisi Teaching University">St. Grigol Peradze Tbilisi Teaching University</option>
+        <option value="St. King Tamar University of Patriarchate of Georgia">St. King Tamar University of Patriarchate of Georgia</option>
+        <option value="Teaching University European Academy">Teaching University European Academy</option>
+        <option value="Euroregional Teaching University">Euroregional Teaching University</option>
+        <!-- (Total 58 entries.) -->
+      </select>
 
-    
       <label>Gender</label>
-      <select>
+      <select id="genderSelect">
         <option>Any</option>
         <option>Male</option>
         <option>Female</option>
       </select>
 
       <label>Preferences</label>
-      <input type="text" placeholder="e.g. Quiet, Early riser" />
+      <input type="text" placeholder="e.g. Quiet, Early riser" id="prefInput" />
     </div>
 
-    <div class="card-grid">
-      <div class="card">
-        <img src="https://via.placeholder.com/80" alt="User" />
-        <h3>Alex</h3>
-        <p>Tbilisi Ivane Javakhishvili State University</p>
-        <p>Looking for: Quiet, Clean</p>
-        <button class="btn">Message</button>
-      </div>
-
-      <div class="card">
-        <img src="https://via.placeholder.com/80" alt="User" />
-        <h3>Ana</h3>
-        <p>Batumi Shota Rustaveli State University</p>
-        <p>Looking for: Night owl, Gamer</p>
-        <button class="btn">Message</button>
-      </div>
-
-      <div class="card">
-        <img src="https://via.placeholder.com/80" alt="User" />
-        <h3>David</h3>
-        <p>Kutaisi International University</p>
-        <p>Looking for: Tidy, No Pets</p>
-        <button class="btn">Message</button>
-      </div>
+    <!-- CARD GRID: POSTS WILL APPEAR HERE -->
+    <div class="card-grid" id="postsContainer">
+      <!-- JavaScript will inject <div class="card">…</div> here -->
     </div>
   </div>
-  <script src="assets/main.js"></script>
+
+  <!-- LOGIN / SIGN UP MODAL -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2 id="modalTitle">Login</h2>
+      <input type="email" id="emailInput" placeholder="Email" />
+      <input type="password" id="passwordInput" placeholder="Password" />
+      <button id="authActionBtn" class="btn">Login</button>
+      <p id="toggleAuthText">
+        Don’t have an account? 
+        <a href="#" id="toggleAuthLink">Sign Up</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- NEW POST FORM (only visible when logged in) -->
+  <div id="newPostSection" class="new-post hidden">
+    <h3>Create a Roommate Listing</h3>
+    <label for="postTitle">Title</label>
+    <input type="text" id="postTitle" placeholder="e.g. Looking for a quiet roommate near TSU" />
+    <label for="postUniv">University</label>
+    <select id="postUniv">
+      <!-- Same 58 options as above -->
+      <option value="Kutaisi International University">Kutaisi International University</option>
+      <option value="Ivane Javakhishvili Tbilisi State University">Ivane Javakhishvili Tbilisi State University</option>
+      <option value="Ilia State University">Ilia State University</option>
+      <option value="Georgian Technical University">Georgian Technical University</option>
+      <option value="Tbilisi State Medical University">Tbilisi State Medical University</option>
+      <option value="Akaki Tsereteli State University">Akaki Tsereteli State University</option>
+      <option value="Batumi Shota Rustaveli State University">Batumi Shota Rustaveli State University</option>
+      <option value="Caucasus University">Caucasus University</option>
+      <option value="International Black Sea University">International Black Sea University</option>
+      <option value="Sokhumi State University">Sokhumi State University</option>
+      <option value="Batumi State Maritime Academy">Batumi State Maritime Academy</option>
+      <option value="Tbilisi State Academy of Arts">Tbilisi State Academy of Arts</option>
+      <option value="University of Georgia in Tbilisi">University of Georgia in Tbilisi</option>
+      <option value="Agricultural University of Georgia">Agricultural University of Georgia</option>
+      <option value="Free University of Tbilisi">Free University of Tbilisi</option>
+      <option value="Georgian National University SEU">Georgian National University SEU</option>
+      <option value="Shota Rustaveli Theatre and Film Georgian State University">Shota Rustaveli Theatre and Film Georgian State University</option>
+      <option value="V. Sarajishvili Tbilisi State Conservatoire">V. Sarajishvili Tbilisi State Conservatoire</option>
+      <option value="Business and Technology University">Business and Technology University</option>
+      <option value="Georgian Institute of Public Affairs">Georgian Institute of Public Affairs</option>
+      <option value="Georgian American University">Georgian American University</option>
+      <option value="David Tvildiani Medical University">David Tvildiani Medical University</option>
+      <option value="Iakob Gogebashvili Telavi State University">Iakob Gogebashvili Telavi State University</option>
+      <option value="New Vision University">New Vision University</option>
+      <option value="Caucasus International University">Caucasus International University</option>
+      <option value="Gori State Teaching University">Gori State Teaching University</option>
+      <option value="Grigol Robakidze University">Grigol Robakidze University</option>
+      <option value="European University - Tbilisi">European University - Tbilisi</option>
+      <option value="Shota Meskhia State Teaching University">Shota Meskhia State Teaching University</option>
+      <option value="Tbilisi Open Teaching University">Tbilisi Open Teaching University</option>
+      <option value="Saint Andrew the First-Called Georgian University">Saint Andrew the First-Called Georgian University</option>
+      <option value="Sulkhan-Saba Orbeliani Teaching University">Sulkhan-Saba Orbeliani Teaching University</option>
+      <option value="East European University, Georgia">East European University, Georgia</option>
+      <option value="Kutaisi University">Kutaisi University</option>
+      <option value="BAU International University, Batumi">BAU International University, Batumi</option>
+      <option value="Petre Shotadze Tbilisi Medical Academy">Petre Shotadze Tbilisi Medical Academy</option>
+      <option value="Samtskhe-Javakheti State University">Samtskhe-Javakheti State University</option>
+      <option value="Batumi Navigation Teaching University">Batumi Navigation Teaching University</option>
+      <option value="Teaching University Geomedi">Teaching University Geomedi</option>
+      <option value="Bank of Georgia University">Bank of Georgia University</option>
+      <option value="Georgian Aviation University">Georgian Aviation University</option>
+      <option value="Guram Tavartkiladze Teaching University">Guram Tavartkiladze Teaching University</option>
+      <option value="Batumi Art Teaching University">Batumi Art Teaching University</option>
+      <option value="David Aghmashenebeli University of Georgia">David Aghmashenebeli University of Georgia</option>
+      <option value="Georgian State Teaching University of Physical Education and Sport">Georgian State Teaching University of Physical Education and Sport</option>
+      <option value="Tbilisi Humanitarian Teaching University">Tbilisi Humanitarian Teaching University</option>
+      <option value="Tbilisi Teaching University Gorgasali">Tbilisi Teaching University Gorgasali</option>
+      <option value="Tbilisi David Agmashenebeli Teaching University">Tbilisi David Agmashenebeli Teaching University</option>
+      <option value="Tbilisi Teaching University">Tbilisi Teaching University</option>
+      <option value="Tbel Abuserisdze Teaching University of Georgian Patriarchate">Tbel Abuserisdze Teaching University of Georgian Patriarchate</option>
+      <option value="Tbilisi University of International Relations">Tbilisi University of International Relations</option>
+      <option value="Tbilisi Medical Teaching University Hippocrates">Tbilisi Medical Teaching University Hippocrates</option>
+      <option value="Ekvtime Takaishvili Teaching University">Ekvtime Takaishvili Teaching University</option>
+      <option value="American University for Humanities - Tbilisi">American University for Humanities - Tbilisi</option>
+      <option value="St. Grigol Peradze Tbilisi Teaching University">St. Grigol Peradze Tbilisi Teaching University</option>
+      <option value="St. King Tamar University of Patriarchate of Georgia">St. King Tamar University of Patriarchate of Georgia</option>
+      <option value="Teaching University European Academy">Teaching University European Academy</option>
+      <option value="Euroregional Teaching University">Euroregional Teaching University</option>
+    </select>
+
+    <label for="postMessage">Message</label>
+    <textarea id="postMessage" placeholder="Describe yourself and what you’re looking for…" rows="3"></textarea>
+    <button id="savePostBtn" class="btn">Post Listing</button>
+  </div>
+
+  <!-- LOGGED-IN USER GREETING / LOGOUT -->
+  <div id="userInfo" class="user-info hidden">
+    <span id="welcomeText"></span>
+    <button id="logoutBtn" class="btn small">Log Out</button>
+  </div>
+
+  <script>
+    // ─────────────────────────────────────────
+    // 1) Initialize Firebase
+    // ─────────────────────────────────────────
+    // Replace the object below with your own Firebase config from your console:
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY_HERE",
+      authDomain: "YOUR_AUTH_DOMAIN_HERE",
+      projectId: "YOUR_PROJECT_ID_HERE",
+      // … etc.
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // ─────────────────────────────────────────
+    // 2) AUTH MODAL HANDLING
+    // ─────────────────────────────────────────
+    const loginBtn       = document.getElementById("loginBtn");
+    const authModal      = document.getElementById("authModal");
+    const closeModal     = document.getElementById("closeModal");
+    const modalTitle     = document.getElementById("modalTitle");
+    const emailInput     = document.getElementById("emailInput");
+    const passwordInput  = document.getElementById("passwordInput");
+    const authActionBtn  = document.getElementById("authActionBtn");
+    const toggleAuthLink = document.getElementById("toggleAuthLink");
+    let isLoginMode = true; // toggles between login/signup
+
+    // Show modal when “Login / Sign Up” clicked
+    loginBtn.addEventListener("click", () => {
+      authModal.style.display = "block";
+      updateModalUI();
+    });
+
+    // Close when “×” is clicked
+    closeModal.addEventListener("click", () => {
+      authModal.style.display = "none";
+    });
+
+    // Switch between Login & Sign Up
+    toggleAuthLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      isLoginMode = !isLoginMode;
+      updateModalUI();
+    });
+
+    function updateModalUI() {
+      if (isLoginMode) {
+        modalTitle.textContent = "Login";
+        authActionBtn.textContent = "Login";
+        toggleAuthLink.textContent = "Sign Up";
+        document.getElementById("toggleAuthText").firstChild.textContent = "Don’t have an account? ";
+      } else {
+        modalTitle.textContent = "Sign Up";
+        authActionBtn.textContent = "Sign Up";
+        toggleAuthLink.textContent = "Login";
+        document.getElementById("toggleAuthText").firstChild.textContent = "Already have an account? ";
+      }
+    }
+
+    // Perform Login or Sign Up
+    authActionBtn.addEventListener("click", () => {
+      const email    = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      if (isLoginMode) {
+        // LOGIN
+        auth.signInWithEmailAndPassword(email, password)
+          .then(() => {
+            authModal.style.display = "none";
+          })
+          .catch(err => alert("Login Error: " + err.message));
+      } else {
+        // SIGN UP
+        auth.createUserWithEmailAndPassword(email, password)
+          .then(() => {
+            authModal.style.display = "none";
+          })
+          .catch(err => alert("Sign Up Error: " + err.message));
+      }
+    });
+
+    // ─────────────────────────────────────────
+    // 3) LISTEN FOR AUTH STATE CHANGES
+    // ─────────────────────────────────────────
+    const userInfoDiv   = document.getElementById("userInfo");
+    const welcomeText   = document.getElementById("welcomeText");
+    const logoutBtn     = document.getElementById("logoutBtn");
+    const newPostSection= document.getElementById("newPostSection");
+    const savePostBtn   = document.getElementById("savePostBtn");
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        // User is logged in
+        loginBtn.style.display = "none";
+        userInfoDiv.classList.remove("hidden");
+        welcomeText.textContent = `Hello, ${user.email}`;
+        newPostSection.classList.remove("hidden");
+      } else {
+        // No user is logged in
+        loginBtn.style.display = "inline-block";
+        userInfoDiv.classList.add("hidden");
+        newPostSection.classList.add("hidden");
+      }
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      auth.signOut();
+    });
+
+    // ─────────────────────────────────────────
+    // 4) SAVING A NEW POST TO FIRESTORE
+    // ─────────────────────────────────────────
+    savePostBtn.addEventListener("click", () => {
+      const title       = document.getElementById("postTitle").value.trim();
+      const university  = document.getElementById("postUniv").value;
+      const message     = document.getElementById("postMessage").value.trim();
+      const user        = auth.currentUser;
+      if (!user) {
+        alert("Please log in first.");
+        return;
+      }
+      if (!title || !message) {
+        alert("Title and message cannot be empty.");
+        return;
+      }
+
+      db.collection("roommatePosts").add({
+        uid: user.uid,
+        authorEmail: user.email,
+        title,
+        university,
+        message,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => {
+        document.getElementById("postTitle").value = "";
+        document.getElementById("postMessage").value = "";
+      }).catch(err => {
+        alert("Error saving post: " + err.message);
+      });
+    });
+
+    // ─────────────────────────────────────────
+    // 5) FETCHING & DISPLAYING POSTS
+    // ─────────────────────────────────────────
+    const postsContainer = document.getElementById("postsContainer");
+
+    db.collection("roommatePosts")
+      .orderBy("timestamp", "desc")
+      .onSnapshot(snapshot => {
+        postsContainer.innerHTML = ""; // clear
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const card = document.createElement("div");
+          card.classList.add("card");
+          card.innerHTML = `
+            <h3>${data.title}</h3>
+            <p><strong>University:</strong> ${data.university}</p>
+            <p>${data.message}</p>
+            <p class="postAuthor">Posted by: ${data.authorEmail}</p>
+          `;
+          postsContainer.appendChild(card);
+        });
+      });
+  </script>
 </body>
 </html>
