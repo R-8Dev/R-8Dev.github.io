@@ -1,6 +1,3 @@
-// Your Firebase config (replace with your actual config)
-
-
 if (typeof firebaseConfig === 'undefined') {
   const firebaseConfig = {
   apiKey: "AIzaSyC0a5wUtspLGBPpJ6XS6Axg-8XsgiiZbZI",
