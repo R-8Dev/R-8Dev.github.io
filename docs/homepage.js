@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const preferences = document.getElementById('preferences').value;
 
       try {
-        await db.collection('records').add({
+        await window.db.collection('records').add({
           uid: user.uid,
           name,
           university,
@@ -52,7 +52,7 @@ async function displayRecords() {
   container.innerHTML = '';
 
   try {
-    const snapshot = await db.collection('records').orderBy('timestamp', 'desc').get();
+    const snapshot = await window.db.collection('records').orderBy('timestamp', 'desc').get();
     snapshot.forEach(doc => {
       const data = doc.data();
       const card = document.createElement('div');
