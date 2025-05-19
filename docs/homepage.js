@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('record-form');
   const container = document.getElementById('records-container');
 
+  // Handle form submission to add records
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -37,14 +38,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Show records only if user is logged in
+  // Listen for auth state changes
   firebase.auth().onAuthStateChanged((user) => {
-    if (user && container) {
-      displayRecords();
+    if (user) {
+      // Fetch user profile data (optional)
+      window.db.collection("users").doc(user.uid).get()
+        .then((doc) => {
+          if (doc.exists) {
+            console.log("User data:", doc.data());
+            // Update UI with user info here if needed
+          } else {
+            console.log("No user record found!");
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+
+      if (container) {
+        displayRecords();  // Show records when user is logged in
+      }
+    } else {
+      // Not logged in — redirect to login page
+      location.replace("login.html");
     }
   });
 });
 
+// Function to display records from Firestore
 async function displayRecords() {
   const container = document.getElementById('records-container');
   if (!container) return;
@@ -53,6 +74,7 @@ async function displayRecords() {
 
   try {
     const snapshot = await window.db.collection('records').orderBy('timestamp', 'desc').get();
+
     snapshot.forEach(doc => {
       const data = doc.data();
       const card = document.createElement('div');
@@ -72,3 +94,4 @@ async function displayRecords() {
     console.error('Failed to load records:', err);
   }
 }
+
