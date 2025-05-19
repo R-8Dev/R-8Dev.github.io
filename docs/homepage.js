@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         displayRecords();  // Show records when user is logged in
       }
     } else {
+       displayRecords();
       // Not logged in 
       // Nothing for now
   });
