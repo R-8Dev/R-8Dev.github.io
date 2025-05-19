@@ -31,13 +31,13 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    window.addEventListener('DOMContentLoaded', () => {
+    // window.addEventListener('DOMContentLoaded', () => {
       auth.onAuthStateChanged((user) => {
         if (user) {
           location.replace("https://r-8dev.github.io");
         }
       });
-    });
+   // });
   </script>
 </head>
 <body>
