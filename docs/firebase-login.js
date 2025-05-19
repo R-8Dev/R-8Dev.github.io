@@ -13,9 +13,12 @@ const firebaseConfig = {
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
-
+const auth = firebase.auth();
 // ✅ Initialize Firestore
 const db = firebase.firestore();
+
+// Make db accessible in other scripts (optional but recommended)
+window.db = db;
 
 // Run when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
