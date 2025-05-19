@@ -32,6 +32,7 @@
      if (!authButton) return;
 
     auth.onAuthStateChanged((user) => {
+      
       if (user) {
         // User is logged in
         authButton.textContent = "Logout";
