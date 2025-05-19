@@ -23,3 +23,40 @@ if (typeof window.auth === 'undefined') {
 if (typeof window.db === 'undefined') {
   window.db = firebase.firestore();
 }
+
+// Assuming you already have auth and db initialized
+
+document.getElementById("signup-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const email = document.getElementById("signup-email").value;
+  const password = document.getElementById("signup-password").value;
+  const confirmPassword = document.getElementById("signup-confirm-password").value;
+
+  if (password !== confirmPassword) {
+    alert("Passwords don't match!");
+    return;
+  }
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+
+      // Add user record to Firestore here
+      db.collection("users").doc(user.uid).set({
+        email: user.email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        // add any other fields you want to store here
+      })
+      .then(() => {
+        alert("Account created successfully!");
+        location.replace("https://r-8dev.github.io");
+      })
+      .catch((error) => {
+        alert("Failed to save user data: " + error.message);
+      });
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+});
