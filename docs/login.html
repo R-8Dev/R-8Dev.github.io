@@ -1,229 +1,186 @@
 <!DOCTYPE html>
-<!-- Coding by CodingLab | www.codinglabweb.com-->
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Responsive Login and Signup Form</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Login and Signup Form</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="loginstyle.css" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="loginstyle.css" />
 
-    <!-- Boxicons CSS -->
-    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+  <!-- Boxicons CSS -->
+  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
 
-    <!-- Firebase SDKs (Compat version) -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
-    <script>
-        
-   if (typeof firebaseConfig === 'undefined') {
-  const firebaseConfig = {
-  apiKey: "AIzaSyC0a5wUtspLGBPpJ6XS6Axg-8XsgiiZbZI",
-  authDomain: "r-8-test.firebaseapp.com",
-  projectId: "r-8-test",
-  storageBucket: "r-8-test.firebasestorage.app",
-  messagingSenderId: "289094248821",
-  appId: "1:289094248821:web:aabdd412a0e5a6e5730b3c",
-  measurementId: "G-62PF9Z5RNY"
-};
-}
+  <script>
+    // ✅ Firebase Config and Initialization
+    const firebaseConfig = {
+      apiKey: "AIzaSyC0a5wUtspLGBPpJ6XS6Axg-8XsgiiZbZI",
+      authDomain: "r-8-test.firebaseapp.com",
+      projectId: "r-8-test",
+      storageBucket: "r-8-test.appspot.com",
+      messagingSenderId: "289094248821",
+      appId: "1:289094248821:web:aabdd412a0e5a6e5730b3c",
+      measurementId: "G-62PF9Z5RNY"
+    };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-window.addEventListener('DOMContentLoaded', () => {
-    auth.onAuthStateChanged((user) => {
+    window.addEventListener('DOMContentLoaded', () => {
+      auth.onAuthStateChanged((user) => {
         if (user) {
-            // ✅ User is logged in
-            location.replace("https://r-8dev.github.io");
+          location.replace("https://r-8dev.github.io");
         }
+      });
     });
-});
-
-
-        
-    </script>
+  </script>
 </head>
 <body>
-    <section class="container forms">
-        <!-- Login Form -->
-        <div class="form login">
-            <div class="form-content">
-                <header>Login</header>
-                <form id="login-form">
-                    <div class="field input-field">
-                        <input type="email" id="login-email" placeholder="Email" required />
-                    </div>
-
-                    <div class="field input-field">
-                        <input type="password" id="login-password" placeholder="Password" required />
-                        <i class="bx bx-hide eye-icon"></i>
-                    </div>
-
-                    <div class="form-link">
-                        <a href="#" class="forgot-pass">Forgot password?</a>
-                    </div>
-
-                    <div class="field button-field">
-                        <button type="submit">Login</button>
-                    </div>
-                </form>
-
-                <div class="form-link">
-                    <span>Don't have an account? <a href="#" class="link signup-link">Signup</a></span>
-                </div>
-            </div>
-
-            <div class="line"></div>
-
-            <div class="media-options">
-                <a href="#" class="field facebook">
-                    <i class="bx bxl-facebook facebook-icon"></i>
-                    <span>Login with Facebook</span>
-                </a>
-            </div>
-
-            <div class="media-options">
-                <a href="#" class="field google">
-                    <img src="assets/google.png" alt="" class="google-img" />
-                    <span>Login with Google</span>
-                </a>
-            </div>
+  <section class="container forms">
+    <!-- Login Form -->
+    <div class="form login">
+      <div class="form-content">
+        <header>Login</header>
+        <form id="login-form">
+          <div class="field input-field">
+            <input type="email" id="login-email" placeholder="Email" required />
+          </div>
+          <div class="field input-field">
+            <input type="password" id="login-password" placeholder="Password" required />
+            <i class="bx bx-hide eye-icon"></i>
+          </div>
+          <div class="form-link">
+            <a href="#" class="forgot-pass">Forgot password?</a>
+          </div>
+          <div class="field button-field">
+            <button type="submit">Login</button>
+          </div>
+        </form>
+        <div class="form-link">
+          <span>Don't have an account? <a href="#" class="link signup-link">Signup</a></span>
         </div>
+      </div>
 
-        <!-- Signup Form -->
-        <div class="form signup">
-            <div class="form-content">
-                <header>Signup</header>
-                <form id="signup-form">
-                    <div class="field input-field">
-                        <input type="email" id="signup-email" placeholder="Email" required />
-                    </div>
+      <div class="line"></div>
 
-                    <div class="field input-field">
-                        <input type="password" id="signup-password" placeholder="Create password" required />
-                    </div>
+      <div class="media-options">
+        <a href="#" class="field facebook">
+          <i class="bx bxl-facebook facebook-icon"></i>
+          <span>Login with Facebook</span>
+        </a>
+      </div>
 
-                    <div class="field input-field">
-                        <input
-                            type="password"
-                            id="signup-confirm-password"
-                            placeholder="Confirm password"
-                            required
-                        />
-                        <i class="bx bx-hide eye-icon"></i>
-                    </div>
+      <div class="media-options">
+        <a href="#" class="field google">
+          <img src="assets/google.png" alt="" class="google-img" />
+          <span>Login with Google</span>
+        </a>
+      </div>
+    </div>
 
-                    <div class="field button-field">
-                        <button type="submit">Signup</button>
-                    </div>
-                </form>
-
-                <div class="form-link">
-                    <span>Already have an account? <a href="#" class="link login-link">Login</a></span>
-                </div>
-            </div>
-
-            <div class="line"></div>
-
-            <div class="media-options">
-                <a href="#" class="field facebook">
-                    <i class="bx bxl-facebook facebook-icon"></i>
-                    <span>Login with Facebook</span>
-                </a>
-            </div>
-
-            <div class="media-options">
-                <a href="#" class="field google">
-                    <img src="assets/google.png" alt="" class="google-img" />
-                    <span>Login with Google</span>
-                </a>
-            </div>
+    <!-- Signup Form -->
+    <div class="form signup">
+      <div class="form-content">
+        <header>Signup</header>
+        <form id="signup-form">
+          <div class="field input-field">
+            <input type="email" id="signup-email" placeholder="Email" required />
+          </div>
+          <div class="field input-field">
+            <input type="password" id="signup-password" placeholder="Create password" required />
+          </div>
+          <div class="field input-field">
+            <input type="password" id="signup-confirm-password" placeholder="Confirm password" required />
+            <i class="bx bx-hide eye-icon"></i>
+          </div>
+          <div class="field button-field">
+            <button type="submit">Signup</button>
+          </div>
+        </form>
+        <div class="form-link">
+          <span>Already have an account? <a href="#" class="link login-link">Login</a></span>
         </div>
-    </section>
+      </div>
 
-    <!-- Your existing JS file -->
-    <script src="login/js/script.js"></script>
+      <div class="line"></div>
 
-    <!-- Firebase Auth handling script -->
-    <script>
-        // Handle Login
-        const loginForm = document.getElementById('login-form');
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
+      <div class="media-options">
+        <a href="#" class="field facebook">
+          <i class="bx bxl-facebook facebook-icon"></i>
+          <span>Login with Facebook</span>
+        </a>
+      </div>
 
-            auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    window.location.href = "index.html"; // 👈 Redirect to homepage
-                        alert('Logged in successfully!');
-                    location.replace("https://r-8dev.github.io");
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
+      <div class="media-options">
+        <a href="#" class="field google">
+          <img src="assets/google.png" alt="" class="google-img" />
+          <span>Login with Google</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local JS -->
+  <script src="login/js/script.js"></script>
+
+  <!-- Firebase Auth handling -->
+  <script>
+    // Login
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          alert('Logged in successfully!');
+          location.replace("https://r-8dev.github.io");
+        })
+        .catch((error) => {
+          alert(error.message);
         });
+    });
 
-        // Handle Signup
-        const signupForm = document.getElementById('signup-form');
-        signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+    // Signup
+    document.getElementById('signup-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const confirmPassword = document.getElementById('signup-confirm-password').value;
 
-            const email = document.getElementById('signup-email').value;
-            const password = document.getElementById('signup-password').value;
-            const confirmPassword = document.getElementById('signup-confirm-password').value;
+      if (password !== confirmPassword) {
+        alert("Passwords don't match!");
+        return;
+      }
 
-            if (password !== confirmPassword) {
-                alert("Passwords don't match!");
-                return;
-            }
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    window.location.href = "index.html"; // 👈 Redirect to homepage
-                        alert('Account created successfully!');
-                    location.replace("https://r-8dev.github.io");
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          alert('Account created successfully!');
+          location.replace("https://r-8dev.github.io");
+        })
+        .catch((error) => {
+          alert(error.message);
         });
+    });
 
-        // Handle Google Login
-        const googleButton = document.querySelector('.field.google');
-        googleButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then((result) => {
-                    window.location.href = "index.html"; // 👈 Redirect to homepage
-                        alert('Logged in with Google!');
-                    location.replace("https://r-8dev.github.io");
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
+    // Google login
+    document.querySelector('.field.google').addEventListener('click', function (e) {
+      e.preventDefault();
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(() => {
+          alert('Logged in with Google!');
+          location.replace("https://r-8dev.github.io");
+        })
+        .catch((error) => {
+          alert(error.message);
         });
-    </script>
-
-
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-<!-- Your Firebase Initialization script -->
-<script src="firebase-init.js"></script>
-
-<!-- Other JS scripts that depend on Firebase -->
-<script src="firebase-login.js"></script>  <!-- on login page -->
-<script src="homepage.js"></script>        <!-- on homepage -->
-
-    
+    });
+  </script>
 </body>
 </html>
