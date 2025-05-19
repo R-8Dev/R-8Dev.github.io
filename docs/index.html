@@ -6,6 +6,30 @@
   <title>R-8</title>
   <link rel="stylesheet" href="assets/style.css" />
 
+
+
+
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+  
+
   
 </head>
 <body>
@@ -14,7 +38,7 @@
       <img src="assets/178207_DormsEblock2.png" alt="Logo" style="height: 40px;" />
       <h1>R-8</h1>
     </div>
-    <button class="btn"  onclick="window.location.href='sign-in.html'">Login / Sign Up0</button>
+    <button class="btn" id="auth-button" onclick="window.location.href='sign-in.html'">Login / Sign Up</button>
   </div>
   
   <div class="container">
