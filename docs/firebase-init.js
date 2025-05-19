@@ -16,7 +16,7 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-// Declare auth/db only once
+// Declare auth and db globally (once)
 if (typeof window.auth === 'undefined') {
   window.auth = firebase.auth();
 }
@@ -24,39 +24,43 @@ if (typeof window.db === 'undefined') {
   window.db = firebase.firestore();
 }
 
-// Assuming you already have auth and db initialized
+// Wait for DOM to load before attaching event listeners
+document.addEventListener("DOMContentLoaded", () => {
+  const signupForm = document.getElementById("signup-form");
 
-document.getElementById("signup-form").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const email = document.getElementById("signup-email").value;
-  const password = document.getElementById("signup-password").value;
-  const confirmPassword = document.getElementById("signup-confirm-password").value;
-
-  if (password !== confirmPassword) {
-    alert("Passwords don't match!");
+  if (!signupForm) {
+    console.warn("Signup form not found on this page.");
     return;
   }
 
-  auth.createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
+  signupForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      // Add user record to Firestore here
-      db.collection("users").doc(user.uid).set({
-        email: user.email,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        // add any other fields you want to store here
+    const email = document.getElementById("signup-email").value;
+    const password = document.getElementById("signup-password").value;
+    const confirmPassword = document.getElementById("signup-confirm-password").value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords don't match!");
+      return;
+    }
+
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        // Add user record to Firestore
+        return db.collection("users").doc(user.uid).set({
+          email: user.email,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
       })
       .then(() => {
         alert("Account created successfully!");
         location.replace("https://r-8dev.github.io");
       })
       .catch((error) => {
-        alert("Failed to save user data: " + error.message);
+        alert("Error: " + error.message);
       });
-    })
-    .catch((error) => {
-      alert(error.message);
-    });
+  });
 });
