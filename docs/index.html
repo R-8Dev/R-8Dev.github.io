@@ -10,10 +10,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-  
   <script>
-
 
     //Firebase
   const firebaseConfig = {
@@ -25,22 +22,22 @@
   appId: "1:289094248821:web:aabdd412a0e5a6e5730b3c",
   measurementId: "G-62PF9Z5RNY"
 };
-
     // Initialize Firebase
     if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
     const auth = firebase.auth();
-
-
- window.addEventListener('DOMContentLoaded', () => {
+    
+  function handleAuthState() {
     const authButton = document.getElementById('auth-button');
+     if (!authButton) return;
 
     auth.onAuthStateChanged((user) => {
       if (user) {
         // User is logged in
         authButton.textContent = "Logout";
         authButton.href = "#"; // prevent navigation
+        
         authButton.addEventListener('click', (e) => {
           e.preventDefault();
           auth.signOut().then(() => {
