@@ -138,8 +138,8 @@
 
       auth.signInWithEmailAndPassword(email, password)
         .then(() => {
-          alert('Logged in successfully!');
           location.replace("https://r-8dev.github.io");
+          alert('Logged in successfully!');
         })
         .catch((error) => {
           alert(error.message);
@@ -160,8 +160,8 @@
 
       auth.createUserWithEmailAndPassword(email, password)
         .then(() => {
-          alert('Account created successfully!');
           location.replace("https://r-8dev.github.io");
+          alert('Account created successfully!');
         })
         .catch((error) => {
           alert(error.message);
@@ -174,8 +174,8 @@
       const provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithPopup(provider)
         .then(() => {
-          alert('Logged in with Google!');
           location.replace("https://r-8dev.github.io");
+          alert('Logged in with Google!');
         })
         .catch((error) => {
           alert(error.message);
