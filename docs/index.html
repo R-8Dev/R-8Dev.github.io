@@ -34,19 +34,17 @@
     auth.onAuthStateChanged((user) => {
       
       if (user) {
-        // User is logged in
-        authButton.textContent = "Logout";
-        authButton.href = "#"; // prevent navigation
-        
-        // Replace button to remove old listeners
-          const newButton = authButton.cloneNode(true);
-          authButton.parentNode.replaceChild(newButton, authButton);
 
-          newButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            auth.signOut().then(() => {
-              alert("Logged out!");
-              location.reload();
+ const newButton = authButton.cloneNode(true); // remove old listeners
+      authButton.parentNode.replaceChild(newButton, authButton);
+
+      newButton.textContent = "Logout";
+      newButton.href = "#";
+      newButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        auth.signOut().then(() => {
+          alert("Logged out!");
+          location.reload();
             });
           }); 
         }  else {
@@ -54,7 +52,7 @@
         authButton.textContent = "Login / Signup";
         authButton.href = "login.html"; 
       }
-        authButton.style.visibility = "visible";
+      document.getElementById('auth-button').style.visibility = "visible";
     });
   }
 window.addEventListener('DOMContentLoaded', handleAuthState);
