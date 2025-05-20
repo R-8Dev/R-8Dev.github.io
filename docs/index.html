@@ -72,7 +72,15 @@
       <img src="assets/178207_DormsEblock2.png" alt="Logo" style="height: 40px;" />
       <h1>R-8</h1>
     </div>
-    <button class="btn" id="auth-button" onclick="window.location.href='login.html'">Login / Sign Up</button>
+    <div id="user-menu" class="user-menu hidden">
+  <img id="user-avatar" class="avatar" src="assets/default-user.png" alt="Profile" />
+  <div id="dropdown-menu" class="dropdown hidden">
+    <a href="login.html" id="signin-option">Sign In</a>
+    <a href="profile.html" id="profile-option" class="hidden">Profile</a>
+    <a href="#" id="record-option" class="hidden">My Record</a>
+    <a href="#" id="logout-option" class="hidden">Logout</a>
+  </div>
+</div>
   </div>
   
   <div class="container">
