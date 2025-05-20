@@ -74,75 +74,209 @@
     </div>
     <button class="btn" id="auth-button" onclick="window.location.href='login.html'">Login / Sign Up</button>
   </div>
+  
+  <div class="container">
+    <div class="filter-panel">
+  <h3>Filter by</h3>
 
-  <!-- FILTERS go on top -->
-  <div class="filter-panel" style="display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem; background: #f9f9f9; border-bottom: 1px solid #ccc;">
-    <div>
-      <label>University</label><br />
-      <select id="filter-university">
-        <option value="">Any</option>
-        <!-- (Keep your <optgroup> university options here) -->
-      </select>
-    </div>
-    <div>
-      <label>Gender</label><br />
-      <select id="filter-gender">
-        <option value="">Any</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-    </div>
-    <div>
-      <label>Preferences</label><br />
-      <input type="text" id="filter-preferences" placeholder="e.g. Quiet, Early riser" />
-    </div>
-  </div>
+  <label>University</label>
+  <select id="filter-university">
+    <option value="">Any</option> <!-- Added for default "Any" -->
+    <optgroup label="State universities">
+      <option>Akaki Tsereteli State University (Kutaisi)</option>
+      <option>Akhaltsikhe State Education University</option>
+      <option>Batumi Art Teaching University</option>
+      <option>Batumi Shota Rustaveli State University</option>
+      <option>Batumi State Maritime Academy</option>
+      <option>Georgian Technical University (Tbilisi)</option>
+      <option>Gori State Teaching University</option>
+      <option>Ilia State University</option>
+      <option>International School of Economics at Tbilisi State University</option>
+      <option>Shota Meskhia Zugdidi State University</option>
+      <option>Sokhumi State University</option>
+      <option>Tbilisi Ivane Javakhishvili State University</option>
+      <option>Tbilisi State Academy of Arts</option>
+      <option>Tbilisi State Medical University</option>
+      <option>Tbilisi Vano Sarajishvili State Conservatory</option>
+      <option>Telavi Iakob Gogebashvili State University</option>
+      <option>Shota Rustaveli University of Theater and Cinema (Tbilisi)</option>
+    </optgroup>
+    <optgroup label="Private universities">
+      <option>Alterbridge University (Tbilisi)</option>
+      <option>Agricultural University of Georgia (Tbilisi)</option>
+      <option>American University for Humanities Tbilisi Campus</option>
+      <option>BAU International University, Batumi (Batumi)</option>
+      <option>Business and Technology University (Tbilisi)</option>
+      <option>Caucasus International University (Tbilisi)</option>
+      <option>Central Global University (Kutaisi)</option>
+      <option>Caucasus University (Tbilisi)</option>
+      <option>David Aghmashenebeli University of Georgia (Tbilisi)</option>
+      <option>David Tvildiani Medical University (Tbilisi)</option>
+      <option>East European University (Tbilisi)</option>
+      <option>European University (Tbilisi)</option>
+      <option>Free University of Tbilisi</option>
+      <option>Georgian American University (Tbilisi)</option>
+      <option>Georgian Aviation University (Tbilisi)</option>
+      <option>Georgian International University (Tbilisi)</option>
+      <option>Georgian Institute of Public Affairs (Tbilisi)</option>
+      <option>Georgian National University SEU (Tbilisi)</option>
+      <option>Grigol Robakidze University (Tbilisi)</option>
+      <option>Guram Tavartkiladze Tbilisi Teaching University</option>
+      <option>International Black Sea University (Tbilisi)</option>
+      <option>Kutaisi University</option>
+      <option>Kutaisi International University</option>
+      <option>New Vision University (Tbilisi)</option>
+      <option>New Georgian University (Poti)</option>
+      <option>Saint Andrews Georgian University (Tbilisi)</option>
+      <option>Sulkhan-Saba Orbeliani University (Tbilisi)</option>
+      <option>Sukhishvili Teaching University (Gori)</option>
+      <option>Petre Shotadze Tbilisi Medical Academy (Tbilisi)</option>
+      <option>Tbilisi Medical Academy</option>
+      <option>Tbilisi Medical Institute "Hippocrates"</option>
+      <option>Tbilisi Teaching University</option>
+      <option>Tbilisi University "Metekhi"</option>
+      <option>Teaching University European Academy (Zugdidi)</option>
+      <option>Teaching University Geomedi (Tbilisi)</option>
+      <option>Teaching University "Iveria" (Tbilisi)</option>
+      <option>Teaching University of International Relations of Georgia (Tbilisi)</option>
+      <option>Teaching University "Rvali" (Rustavi)</option>
+      <option>Teaching University SEU (Tbilisi)</option>
+      <option>The University of Georgia (Tbilisi)</option>
+      <option>University "Sakartvelo" (Tbilisi)</option>
+    </optgroup>
+  </select>
 
-  <!-- MAIN CONTENT: form on left, cards on right -->
-  <div class="main-content" style="display: flex; flex-direction: row; padding: 1rem; gap: 2rem; align-items: flex-start;">
-    
-    <!-- RECORD FORM on the left -->
-    <form id="record-form" style="flex: 1; max-width: 350px;">
-      <input type="text" id="name" placeholder="Your Name" required />
-      <input type="text" id="surname" placeholder="Your Surname" required />
+  <label>Gender</label>
+  <select id="filter-gender">
+    <option value="">Any</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
 
-      <label>Your University</label>
-      <select id="university" required>
-        <option value="">Any</option>
-        <!-- (Keep your <optgroup> university options here) -->
-      </select>
+  <label>Preferences</label>
+  <input type="text" id="filter-preferences" placeholder="e.g. Quiet, Early riser" />
+</div>
 
-      <label for="preferences">About me</label>
-      <textarea id="preferences" placeholder="Write your preferences or a short bio..." maxlength="1500" required rows="6"></textarea>
+   
+    <form id="record-form">
+  <input type="text" id="name" placeholder="Your Name" required />
+  <input type="text" id="surname" placeholder="Your Surame" required />
+
+   <label>Your University</label>
+  <select id="university" required>
+    <option value="">Any</option> <!-- Added for default "Any" -->
+    <optgroup label="State universities">
+      <option>Akaki Tsereteli State University (Kutaisi)</option>
+      <option>Akhaltsikhe State Education University</option>
+      <option>Batumi Art Teaching University</option>
+      <option>Batumi Shota Rustaveli State University</option>
+      <option>Batumi State Maritime Academy</option>
+      <option>Georgian Technical University (Tbilisi)</option>
+      <option>Gori State Teaching University</option>
+      <option>Ilia State University</option>
+      <option>International School of Economics at Tbilisi State University</option>
+      <option>Shota Meskhia Zugdidi State University</option>
+      <option>Sokhumi State University</option>
+      <option>Tbilisi Ivane Javakhishvili State University</option>
+      <option>Tbilisi State Academy of Arts</option>
+      <option>Tbilisi State Medical University</option>
+      <option>Tbilisi Vano Sarajishvili State Conservatory</option>
+      <option>Telavi Iakob Gogebashvili State University</option>
+      <option>Shota Rustaveli University of Theater and Cinema (Tbilisi)</option>
+    </optgroup>
+    <optgroup label="Private universities">
+      <option>Alterbridge University (Tbilisi)</option>
+      <option>Agricultural University of Georgia (Tbilisi)</option>
+      <option>American University for Humanities Tbilisi Campus</option>
+      <option>BAU International University, Batumi (Batumi)</option>
+      <option>Business and Technology University (Tbilisi)</option>
+      <option>Caucasus International University (Tbilisi)</option>
+      <option>Central Global University (Kutaisi)</option>
+      <option>Caucasus University (Tbilisi)</option>
+      <option>David Aghmashenebeli University of Georgia (Tbilisi)</option>
+      <option>David Tvildiani Medical University (Tbilisi)</option>
+      <option>East European University (Tbilisi)</option>
+      <option>European University (Tbilisi)</option>
+      <option>Free University of Tbilisi</option>
+      <option>Georgian American University (Tbilisi)</option>
+      <option>Georgian Aviation University (Tbilisi)</option>
+      <option>Georgian International University (Tbilisi)</option>
+      <option>Georgian Institute of Public Affairs (Tbilisi)</option>
+      <option>Georgian National University SEU (Tbilisi)</option>
+      <option>Grigol Robakidze University (Tbilisi)</option>
+      <option>Guram Tavartkiladze Tbilisi Teaching University</option>
+      <option>International Black Sea University (Tbilisi)</option>
+      <option>Kutaisi University</option>
+      <option>Kutaisi International University</option>
+      <option>New Vision University (Tbilisi)</option>
+      <option>New Georgian University (Poti)</option>
+      <option>Saint Andrews Georgian University (Tbilisi)</option>
+      <option>Sulkhan-Saba Orbeliani University (Tbilisi)</option>
+      <option>Sukhishvili Teaching University (Gori)</option>
+      <option>Petre Shotadze Tbilisi Medical Academy (Tbilisi)</option>
+      <option>Tbilisi Medical Academy</option>
+      <option>Tbilisi Medical Institute "Hippocrates"</option>
+      <option>Tbilisi Teaching University</option>
+      <option>Tbilisi University "Metekhi"</option>
+      <option>Teaching University European Academy (Zugdidi)</option>
+      <option>Teaching University Geomedi (Tbilisi)</option>
+      <option>Teaching University "Iveria" (Tbilisi)</option>
+      <option>Teaching University of International Relations of Georgia (Tbilisi)</option>
+      <option>Teaching University "Rvali" (Rustavi)</option>
+      <option>Teaching University SEU (Tbilisi)</option>
+      <option>The University of Georgia (Tbilisi)</option>
+      <option>University "Sakartvelo" (Tbilisi)</option>
+    </optgroup>
+  </select>
+
+
+      
+  <label for="About me">About me</label>
+<textarea id="preferences" placeholder="Write your preferences or a short bio..." maxlength="1500" required rows="6"></textarea>
+
 
       <label>Your Gender</label>
-      <select id="gender" required>
-        <option value="" disabled selected>Select Gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
+<select id="gender" required>
+  <option value="" disabled selected>Select Gender</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+</select>
 
-      <button type="submit">Add Record</button>
-    </form>
+  <button type="submit">Add Record</button>
+</form>
 
-    <!-- CARDS on the right -->
-    <div style="flex: 3;">
-      <div id="records-container"></div>
+<div id="records-container"></div>
 
-      <div class="card-grid">
-        <!-- Existing hardcoded cards (Alex, Ana, David) go here -->
-        <div class="card">
-          <img src="https://www.archwaycommunities.org/wp-content/uploads/2023/08/EllenNelson-Dominic-1x1-1.jpg" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;" alt="User" />
-          <h3>Alex</h3>
-          <p>Tbilisi Ivane Javakhishvili State University</p>
-          <p>Looking for: Quiet, Clean</p>
-          <button class="btn">Message</button>
-        </div>
-        <!-- Add other cards here -->
-      </div>
-    </div>
-  </div>
+
+
     
+    <div class="card-grid">
+      
+      <div class="card">
+        <img src="https://www.archwaycommunities.org/wp-content/uploads/2023/08/EllenNelson-Dominic-1x1-1.jpg" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;" alt="User" />
+        <h3>Alex</h3>
+          <p>Tbilisi Ivane Javakhishvili State University</p>
+        <p>Looking for: Quiet, Clean</p>
+        <button class="btn">Message</button>
+      </div>
+      
+      <div class="card">
+        <img src="https://media.istockphoto.com/id/1168152441/photo/cool-young-girl-listening-to-music-with-earphones-indoors.jpg?s=612x612&w=0&k=20&c=IFjYQfpLI6VnvDrFjrNdMxVPg8HUMebKtpIUR1mfKlc="  style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;" alt="User" />
+          <h3>Ana</h3>
+        <p>Batumi Shota Rustaveli State University</p>
+        <p>Looking for: Night owl, Gamer</p>
+        <button class="btn">Message</button>
+      </div>
+
+      <div class="card">
+        <img src="https://www.span.eu/media/me4nhqao/10-1x1.jpg"  style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%;" alt="User" />
+        <h3>David</h3>
+        <p>Kutaisi International University</p>
+        <p>Looking for: Tidy, No Pets</p>
+        <button class="btn">Message</button>
+      </div>
+  
+  </div>
   <script src="assets/main.js"></script>
 
 
