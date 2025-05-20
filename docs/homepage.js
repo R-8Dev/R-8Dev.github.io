@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
          const existingRecords = await window.db.collection('records')
-        .where('uid', '==', uid)
+        .where('uid', '==', user.uid)
         .get();
 
         if (!existingRecords.empty) {
