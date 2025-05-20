@@ -105,6 +105,11 @@ async function displayRecords() {
       `;
 
       container.appendChild(card);
+
+      const isOwner = firebase.auth().currentUser?.uid === data.uid;
+const deleteButton = isOwner ? `<button class="btn delete-btn" data-id="${doc.id}">Delete</button>` : "";
+
+      
     });
   } catch (err) {
     console.error('Failed to load records:', err);
