@@ -25,8 +25,8 @@ if (typeof window.db === 'undefined') {
 //document.addEventListener("DOMContentLoaded", () => {     // Removed because of error
  // const signupForm = document.getElementById("signup-form");
 
-  // Only add listener if form is present
-  if (signupForm) {
+  // Only add listener in login.html
+  if (window.location.pathname.endsWith('login.html')) {
     signupForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
