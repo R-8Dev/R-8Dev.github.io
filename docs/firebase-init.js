@@ -62,4 +62,3 @@ if (typeof window.db === 'undefined') {
     // Optional: Log warning so you know it's not running on pages without the form
     console.warn("signup-form not found on this page.");
   }
-});
