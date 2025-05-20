@@ -10,7 +10,6 @@ if (typeof firebaseConfig === 'undefined') {
     measurementId: "G-62PF9Z5RNY"
   };
 }
-
 // Initialize Firebase once
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -22,7 +21,6 @@ if (typeof window.auth === 'undefined') {
 if (typeof window.db === 'undefined') {
   window.db = firebase.firestore();
 }
-
 // Wait for DOM before trying to use elements
 //document.addEventListener("DOMContentLoaded", () => {     // Removed because of error
  // const signupForm = document.getElementById("signup-form");
