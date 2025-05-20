@@ -1,6 +1,22 @@
 // Assumes Firebase is already initialized in fb-login.js
 
 document.addEventListener('DOMContentLoaded', () => {
+
+const universityFilter = document.getElementById('filter-university');
+const genderFilter = document.getElementById('filter-gender');
+const preferencesFilter = document.getElementById('filter-preferences');
+
+// Call displayRecords when any filter changes
+[universityFilter, genderFilter, preferencesFilter].forEach(el => {
+  if (el) {
+    el.addEventListener('change', displayRecords);
+    if (el.tagName === 'INPUT') {
+      el.addEventListener('input', displayRecords);
+    }
+  }
+});
+
+  
   const form = document.getElementById('record-form');
   const container = document.getElementById('records-container');
 
@@ -18,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const name = document.getElementById('name').value;
       const university = document.getElementById('university').value;
       const preferences = document.getElementById('preferences').value;
+      const gender = document.getElementById("gender").value;
 
       try {
          const existingRecords = await window.db.collection('records')
@@ -34,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
           name,
           university,
           preferences,
+          gender,
           timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
 
@@ -86,13 +104,37 @@ async function displayRecords() {
   const container = document.getElementById('records-container');
   if (!container) return;
 
+  const university = document.getElementById('filter-university').value;
+  const gender = document.getElementById('filter-gender').value;
+  const preferences = document.getElementById('filter-preferences').value.toLowerCase();
+
   container.innerHTML = '';
 
+  let query = window.db.collection('records').orderBy('timestamp', 'desc');
+
+  if (university) {
+    query = query.where('university', '==', university);
+  }
+
+  if (gender) {
+    query = query.where('gender', '==', gender);
+  }
+
   try {
-    const snapshot = await window.db.collection('records').orderBy('timestamp', 'desc').get();
+    const snapshot = await query.get();
+    const currentUser = firebase.auth().currentUser;
+    const currentUserId = currentUser ? currentUser.uid : null;
 
     snapshot.forEach(doc => {
       const data = doc.data();
+
+      // Filter preferences manually (because Firestore can't do partial text search)
+      if (preferences && !data.preferences.toLowerCase().includes(preferences)) {
+        return; // skip if preferences don't match
+      }
+
+      const isOwner = currentUserId === data.uid;
+
       const card = document.createElement('div');
       card.className = 'card';
 
@@ -108,27 +150,21 @@ async function displayRecords() {
       container.appendChild(card);
 
       if (isOwner) {
-  card.querySelector('.delete-btn').addEventListener('click', async () => {
-    if (confirm("Are you sure you want to delete your record?")) {
-      try {
-        await db.collection('records').doc(doc.id).delete();
-        displayRecords(); // Refresh the list
-      } catch (err) {
-        alert("Failed to delete record.");
-        console.error(err);
+        card.querySelector('.delete-btn').addEventListener('click', async () => {
+          if (confirm("Are you sure you want to delete your record?")) {
+            try {
+              await window.db.collection('records').doc(doc.id).delete();
+              displayRecords(); // Refresh list after deletion
+            } catch (err) {
+              alert("Failed to delete record.");
+              console.error(err);
+            }
+          }
+        });
       }
-    }
-  });
-}
-
-
-      const isOwner = firebase.auth().currentUser?.uid === data.uid;
-const deleteButton = isOwner ? `<button class="btn delete-btn" data-id="${doc.id}">Delete</button>` : "";
-
-      
     });
   } catch (err) {
     console.error('Failed to load records:', err);
+    alert('Error loading records.');
   }
 }
-
