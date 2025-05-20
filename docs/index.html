@@ -76,8 +76,89 @@
   </div>
   
   <div class="container">
-  
- <form id="record-form">
+    <div class="filter-panel">
+  <h3>Filter by</h3>
+
+  <label>University</label>
+  <select id="filter-university">
+    <option value="">Any</option> <!-- Added for default "Any" -->
+    <optgroup label="State universities">
+      <option>Akaki Tsereteli State University (Kutaisi)</option>
+      <option>Akhaltsikhe State Education University</option>
+      <option>Batumi Art Teaching University</option>
+      <option>Batumi Shota Rustaveli State University</option>
+      <option>Batumi State Maritime Academy</option>
+      <option>Georgian Technical University (Tbilisi)</option>
+      <option>Gori State Teaching University</option>
+      <option>Ilia State University</option>
+      <option>International School of Economics at Tbilisi State University</option>
+      <option>Shota Meskhia Zugdidi State University</option>
+      <option>Sokhumi State University</option>
+      <option>Tbilisi Ivane Javakhishvili State University</option>
+      <option>Tbilisi State Academy of Arts</option>
+      <option>Tbilisi State Medical University</option>
+      <option>Tbilisi Vano Sarajishvili State Conservatory</option>
+      <option>Telavi Iakob Gogebashvili State University</option>
+      <option>Shota Rustaveli University of Theater and Cinema (Tbilisi)</option>
+    </optgroup>
+    <optgroup label="Private universities">
+      <option>Alterbridge University (Tbilisi)</option>
+      <option>Agricultural University of Georgia (Tbilisi)</option>
+      <option>American University for Humanities Tbilisi Campus</option>
+      <option>BAU International University, Batumi (Batumi)</option>
+      <option>Business and Technology University (Tbilisi)</option>
+      <option>Caucasus International University (Tbilisi)</option>
+      <option>Central Global University (Kutaisi)</option>
+      <option>Caucasus University (Tbilisi)</option>
+      <option>David Aghmashenebeli University of Georgia (Tbilisi)</option>
+      <option>David Tvildiani Medical University (Tbilisi)</option>
+      <option>East European University (Tbilisi)</option>
+      <option>European University (Tbilisi)</option>
+      <option>Free University of Tbilisi</option>
+      <option>Georgian American University (Tbilisi)</option>
+      <option>Georgian Aviation University (Tbilisi)</option>
+      <option>Georgian International University (Tbilisi)</option>
+      <option>Georgian Institute of Public Affairs (Tbilisi)</option>
+      <option>Georgian National University SEU (Tbilisi)</option>
+      <option>Grigol Robakidze University (Tbilisi)</option>
+      <option>Guram Tavartkiladze Tbilisi Teaching University</option>
+      <option>International Black Sea University (Tbilisi)</option>
+      <option>Kutaisi University</option>
+      <option>Kutaisi International University</option>
+      <option>New Vision University (Tbilisi)</option>
+      <option>New Georgian University (Poti)</option>
+      <option>Saint Andrews Georgian University (Tbilisi)</option>
+      <option>Sulkhan-Saba Orbeliani University (Tbilisi)</option>
+      <option>Sukhishvili Teaching University (Gori)</option>
+      <option>Petre Shotadze Tbilisi Medical Academy (Tbilisi)</option>
+      <option>Tbilisi Medical Academy</option>
+      <option>Tbilisi Medical Institute "Hippocrates"</option>
+      <option>Tbilisi Teaching University</option>
+      <option>Tbilisi University "Metekhi"</option>
+      <option>Teaching University European Academy (Zugdidi)</option>
+      <option>Teaching University Geomedi (Tbilisi)</option>
+      <option>Teaching University "Iveria" (Tbilisi)</option>
+      <option>Teaching University of International Relations of Georgia (Tbilisi)</option>
+      <option>Teaching University "Rvali" (Rustavi)</option>
+      <option>Teaching University SEU (Tbilisi)</option>
+      <option>The University of Georgia (Tbilisi)</option>
+      <option>University "Sakartvelo" (Tbilisi)</option>
+    </optgroup>
+  </select>
+
+  <label>Gender</label>
+  <select id="filter-gender">
+    <option value="">Any</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+
+  <label>Preferences</label>
+  <input type="text" id="filter-preferences" placeholder="e.g. Quiet, Early riser" />
+</div>
+
+   
+    <form id="record-form">
   <input type="text" id="name" placeholder="Your Name" required />
   <input type="text" id="surname" placeholder="Your Surame" required />
 
@@ -163,91 +244,8 @@
 
   <button type="submit">Add Record</button>
 </form>
+
 <div id="records-container"></div>
-</div>
-
-   
-   
-<div class="filter-panel">
-  <h3>Filter by</h3>
-
-  <label>University</label>
-  <select id="filter-university">
-    <option value="">Any</option> <!-- Added for default "Any" -->
-    <optgroup label="State universities">
-      <option>Akaki Tsereteli State University (Kutaisi)</option>
-      <option>Akhaltsikhe State Education University</option>
-      <option>Batumi Art Teaching University</option>
-      <option>Batumi Shota Rustaveli State University</option>
-      <option>Batumi State Maritime Academy</option>
-      <option>Georgian Technical University (Tbilisi)</option>
-      <option>Gori State Teaching University</option>
-      <option>Ilia State University</option>
-      <option>International School of Economics at Tbilisi State University</option>
-      <option>Shota Meskhia Zugdidi State University</option>
-      <option>Sokhumi State University</option>
-      <option>Tbilisi Ivane Javakhishvili State University</option>
-      <option>Tbilisi State Academy of Arts</option>
-      <option>Tbilisi State Medical University</option>
-      <option>Tbilisi Vano Sarajishvili State Conservatory</option>
-      <option>Telavi Iakob Gogebashvili State University</option>
-      <option>Shota Rustaveli University of Theater and Cinema (Tbilisi)</option>
-    </optgroup>
-    <optgroup label="Private universities">
-      <option>Alterbridge University (Tbilisi)</option>
-      <option>Agricultural University of Georgia (Tbilisi)</option>
-      <option>American University for Humanities Tbilisi Campus</option>
-      <option>BAU International University, Batumi (Batumi)</option>
-      <option>Business and Technology University (Tbilisi)</option>
-      <option>Caucasus International University (Tbilisi)</option>
-      <option>Central Global University (Kutaisi)</option>
-      <option>Caucasus University (Tbilisi)</option>
-      <option>David Aghmashenebeli University of Georgia (Tbilisi)</option>
-      <option>David Tvildiani Medical University (Tbilisi)</option>
-      <option>East European University (Tbilisi)</option>
-      <option>European University (Tbilisi)</option>
-      <option>Free University of Tbilisi</option>
-      <option>Georgian American University (Tbilisi)</option>
-      <option>Georgian Aviation University (Tbilisi)</option>
-      <option>Georgian International University (Tbilisi)</option>
-      <option>Georgian Institute of Public Affairs (Tbilisi)</option>
-      <option>Georgian National University SEU (Tbilisi)</option>
-      <option>Grigol Robakidze University (Tbilisi)</option>
-      <option>Guram Tavartkiladze Tbilisi Teaching University</option>
-      <option>International Black Sea University (Tbilisi)</option>
-      <option>Kutaisi University</option>
-      <option>Kutaisi International University</option>
-      <option>New Vision University (Tbilisi)</option>
-      <option>New Georgian University (Poti)</option>
-      <option>Saint Andrews Georgian University (Tbilisi)</option>
-      <option>Sulkhan-Saba Orbeliani University (Tbilisi)</option>
-      <option>Sukhishvili Teaching University (Gori)</option>
-      <option>Petre Shotadze Tbilisi Medical Academy (Tbilisi)</option>
-      <option>Tbilisi Medical Academy</option>
-      <option>Tbilisi Medical Institute "Hippocrates"</option>
-      <option>Tbilisi Teaching University</option>
-      <option>Tbilisi University "Metekhi"</option>
-      <option>Teaching University European Academy (Zugdidi)</option>
-      <option>Teaching University Geomedi (Tbilisi)</option>
-      <option>Teaching University "Iveria" (Tbilisi)</option>
-      <option>Teaching University of International Relations of Georgia (Tbilisi)</option>
-      <option>Teaching University "Rvali" (Rustavi)</option>
-      <option>Teaching University SEU (Tbilisi)</option>
-      <option>The University of Georgia (Tbilisi)</option>
-      <option>University "Sakartvelo" (Tbilisi)</option>
-    </optgroup>
-  </select>
-
-  <label>Gender</label>
-  <select id="filter-gender">
-    <option value="">Any</option>
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-  </select>
-
-  <label>Preferences</label>
-  <input type="text" id="filter-preferences" placeholder="e.g. Quiet, Early riser" />
-
 
 
 
