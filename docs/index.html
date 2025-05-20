@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>R-8</title>
   <link rel="stylesheet" href="assets/style.css" />
 
@@ -10,6 +10,15 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <style>
+    .user-profile { position: relative; display: inline-block; }
+    .user-img { width: 40px; height: 40px; border-radius: 50%; cursor: pointer; object-fit: cover; }
+    .dropdown { display: none; position: absolute; right: 0; background: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index:1; border-radius:8px; overflow:hidden; min-width:150px; }
+    .dropdown a { display: block; padding: 10px; text-decoration: none; color: black; border-bottom: 1px solid #eee; }
+    .dropdown a:hover { background: #f0f0f0; }
+  </style>
+
   <script>
     //Firebase
   const firebaseConfig = {
@@ -21,52 +30,87 @@
   appId: "1:289094248821:web:aabdd412a0e5a6e5730b3c",
   measurementId: "G-62PF9Z5RNY"
 };
-    // Initialize Firebase
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
-  const auth = firebase.auth();
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-  function setLoginButton(button) {
-    button.textContent = "Login / Signup";
-    button.href = "login.html";
-    button.onclick = null;
-    button.style.visibility = "visible";
-  }
+    // Toggle dropdown visibility
+    function toggleDropdown() {
+      const dd = document.getElementById('user-dropdown');
+      dd.style.display = dd.style.display === 'block' ? 'none' : 'block';
+    }
 
-  function handleAuthState() {
-    const authButton = document.getElementById('auth-button');
-    if (!authButton) return;
+    // Setup user profile menu
+    function setupUserProfile(user) {
+      const container = document.getElementById('profile-container');
+      container.innerHTML = '';
 
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        const newButton = authButton.cloneNode(true); // remove old listeners
-        authButton.parentNode.replaceChild(newButton, authButton);
+      // Avatar
+      const img = document.createElement('img');
+      img.className = 'user-img';
+      img.src = user.photoURL || 'assets/default-user.png';
+      img.alt = 'User';
+      img.onclick = toggleDropdown;
+      container.appendChild(img);
 
-        newButton.textContent = "Logout";
-        newButton.href = "#";
+      // Dropdown
+      const dropdown = document.createElement('div');
+      dropdown.id = 'user-dropdown';
+      dropdown.className = 'dropdown';
 
-        newButton.addEventListener('click', (e) => {
-          e.preventDefault();
-          auth.signOut().then(() => {
-            alert("Logged out!");
-            setLoginButton(newButton);
-          });
-        });
+      // Profile link
+      const profileLink = document.createElement('a');
+      profileLink.href = 'profile.html';
+      profileLink.textContent = 'Profile';
+      dropdown.appendChild(profileLink);
 
-        newButton.style.visibility = "visible";
-      } else {
-        setLoginButton(authButton);
-      }
+      // My Record link: check Firestore
+      db.collection('records').where('uid', '==', user.uid).limit(1).get()
+        .then(snapshot => {
+          if (!snapshot.empty) {
+            const recordLink = document.createElement('a');
+            recordLink.href = 'myrecord.html';
+            recordLink.textContent = 'My Record';
+            dropdown.appendChild(recordLink);
+          }
+        })
+        .catch(err => console.error('Error fetching record:', err));
+
+      // Logout link
+      const logoutLink = document.createElement('a');
+      logoutLink.href = '#';
+      logoutLink.textContent = 'Logout';
+      logoutLink.onclick = e => { e.preventDefault(); auth.signOut().then(() => location.reload()); };
+      dropdown.appendChild(logoutLink);
+
+      container.appendChild(dropdown);
+    }
+
+    // Auth state listener
+    window.addEventListener('DOMContentLoaded', () => {
+      const profileContainer = document.getElementById('profile-container');
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          setupUserProfile(user);
+        } else {
+          profileContainer.innerHTML = '<a class="btn" href="login.html">Login / Sign Up</a>';
+        }
+      });
     });
-  }
-
-  window.addEventListener('DOMContentLoaded', handleAuthState);
-    
+      window.addEventListener('DOMContentLoaded', handleAuthState);
   </script>
-  
 </head>
+  
 <body>
+  <div class="header">
+    <div class="logo">
+      <img src="assets/178207_DormsEblock2.png" alt="Logo" style="height:40px;" />
+      <h1>R-8</h1>
+    </div>
+    <div id="profile-container" class="user-profile"></div>
+  </div>
+
+  </script>
   <div class="header">
     <div class="logo">
       <img src="assets/178207_DormsEblock2.png" alt="Logo" style="height: 40px;" />
