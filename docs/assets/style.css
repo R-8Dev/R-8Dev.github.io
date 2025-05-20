@@ -280,3 +280,21 @@ button:hover {
 #auth-button {
   visibility: hidden;
 }
+
+textarea#preferences {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical; /* allow user to resize vertically */
+  box-shadow: inset 0 1px 3px #ddd;
+  font-family: Arial, sans-serif;
+  transition: border-color 0.3s ease;
+}
+
+textarea#preferences:focus {
+  border-color: #1877f2; /* Facebook blue */
+  outline: none;
+  box-shadow: 0 0 5px #1877f2;
+}
