@@ -75,6 +75,7 @@ const preferencesFilter = document.getElementById('filter-preferences');
     // Update your UI here
   }
 });
+
       // Fetch user profile data (optional)
       window.db.collection("users").doc(user.uid).get()
         .then((doc) => {
@@ -97,6 +98,23 @@ const preferencesFilter = document.getElementById('filter-preferences');
       // Nothing for now
     }
   });
+
+  const preferencesTextarea = document.getElementById('preferences');
+const wordCountDisplay = document.getElementById('word-count');
+
+preferencesTextarea.addEventListener('input', () => {
+  const words = preferencesTextarea.value.trim().split(/\s+/).filter(Boolean);
+  const wordCount = words.length;
+  wordCountDisplay.textContent = `${wordCount} / 250 words`;
+  
+  if (wordCount > 250) {
+    wordCountDisplay.style.color = 'red';
+  } else {
+    wordCountDisplay.style.color = 'black';
+  }
+});
+
+  
 });
 
 // Function to display records from Firestore
