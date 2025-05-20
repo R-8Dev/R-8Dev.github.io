@@ -102,9 +102,25 @@ async function displayRecords() {
         <p>${data.university}</p>
         <p>Looking for: ${data.preferences}</p>
         <button class="btn">Message</button>
+        ${isOwner ? `<button class="btn delete-btn" data-id="${doc.id}">Delete</button>` : ''}
       `;
 
       container.appendChild(card);
+
+      if (isOwner) {
+  card.querySelector('.delete-btn').addEventListener('click', async () => {
+    if (confirm("Are you sure you want to delete your record?")) {
+      try {
+        await db.collection('records').doc(doc.id).delete();
+        displayRecords(); // Refresh the list
+      } catch (err) {
+        alert("Failed to delete record.");
+        console.error(err);
+      }
+    }
+  });
+}
+
 
       const isOwner = firebase.auth().currentUser?.uid === data.uid;
 const deleteButton = isOwner ? `<button class="btn delete-btn" data-id="${doc.id}">Delete</button>` : "";
